@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASS va SCSS Superqahramonlari! 🦸‍♂️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #00cec9;
+            --accent: #fdcb6e;
+            --text: #2d3436;
+            --bg: #f5f6fa;
+            --demo-color: #e84393; /* SASS Variable simulatsiyasi uchun */
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            background-image: url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M20 20.5V18H0v-2h20v-2.5L23.5 17 20 20.5zM0 20h2v20H0V20zm20 20v-2.5L16.5 34 20 30.5V33h20v2H20v5zM40 20h-2V0h2v20z" fill="%23d1d8e0" fill-opacity="0.3" fill-rule="evenodd"/%3E%3C/svg%3E');
+        }
+
+        h1, h2, h3 { font-family: 'Baloo 2', cursive; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--primary), #a29bfe);
+            color: white;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header h1 { font-size: 3.5em; margin: 0; text-shadow: 3px 3px 0px rgba(0,0,0,0.2); }
+        header p { font-size: 1.5em; font-weight: 600; }
+
+        /* --- Cards --- */
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-top: 8px solid var(--secondary);
+            position: relative;
+        }
+
+        .section-card h2 {
+            color: var(--primary);
+            font-size: 2.2em;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight {
+            background-color: var(--accent);
+            color: #d63031;
+            padding: 2px 10px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* --- Interactive Demo Areas --- */
+        .demo-area {
+            background: #dfe6e9;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 3px dashed #b2bec3;
+        }
+
+        .code-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .code-block {
+            flex: 1;
+            background: #2d3436;
+            color: #a29bfe;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .code-block span.prop { color: #00cec9; }
+        .code-block span.val { color: #ffeaa7; }
+        .code-block span.tag { color: #ff7675; }
+        .code-block span.var { color: #fd79a8; font-weight: bold; }
+
+        /* --- Buttons --- */
+        .btn-magic {
+            background: linear-gradient(45deg, #ff9f43, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-family: 'Baloo 2', cursive;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            display: inline-block;
+            margin: 10px;
+        }
+        .btn-magic:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 10px 20px rgba(255, 107, 107, 0.6); }
+
+        /* --- Variables Demo --- */
+        .color-btns { display: flex; gap: 10px; margin-top: 15px; }
+        .color-btn {
+            width: 40px; height: 40px; border-radius: 50%; border: 3px solid white;
+            cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.16); transition: 0.2s;
+        }
+        .color-btn:hover { transform: scale(1.2); }
+        .demo-box {
+            background-color: var(--demo-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.5s;
+        }
+        .demo-text { color: var(--demo-color); font-weight: bold; transition: color 0.5s; font-size: 1.3em;}
+
+        /* --- Game Section --- */
+        .game-board {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border-top: none;
+        }
+        .game-board h2 { color: var(--accent); }
+        .question-box { font-size: 1.5em; margin-bottom: 20px; font-weight: bold; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .opt-btn {
+            background: white;
+            color: var(--primary);
+            border: 4px solid transparent;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Nunito', sans-serif;
+        }
+        .opt-btn:hover { transform: scale(1.05); border-color: var(--accent); }
+        .opt-btn.correct { background: #00b894; color: white; border-color: white; }
+        .opt-btn.wrong { background: #d63031; color: white; border-color: white; }
+        
+        #score-board {
+            font-size: 2em;
+            color: var(--accent);
+            font-weight: 900;
+            margin-top: 20px;
+            font-family: 'Baloo 2', cursive;
+        }
+
+        /* --- Tools Grid --- */
+        .tools-grid { display: flex; justify-content: space-between; gap: 15px; margin-top: 20px; }
+        .tool { background: white; padding: 20px; border-radius: 15px; width: 30%; text-align: center; border: 2px solid #dfe6e9; }
+        .tool img { width: 60px; height: 60px; margin-bottom: 10px; }
+        .tool h4 { margin: 0 0 10px 0; color: #2d3436; font-size: 1.4em;}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>SASS va SCSS Sehrgarligi! 🪄</h1>
+            <p>Veb-saytlarni bezashning eng qiziqarli usulini o'rganamiz</p>
+        </header>
+
+        <div class="section-card">
+            <h2>😫 1. Nega faqat CSS ning o'zi zerikarli?</h2>
+            <p>Tasavvur qiling, sizda katta sayt bor. Unda 50 ta joyda "ko'k" rang ishlatilgan. Agar mijoz <i>"Buni qizil qilaylik"</i> desa, nima bo'ladi? Siz 50 marta kodni qidirib, o'zgartirib chiqishingiz kerak! Bu juda ko'p vaqt oladi. Shuning uchun bizga <span class="highlight">SASS</span> kerak!</p>
+        </div>
+
+        <div class="section-card" style="border-top-color: #e84393;">
+            <h2>🎁 2. SASS "Variables" (O'zgaruvchilar)</h2>
+            <p><b>Variables</b> — bu sehrli quticha. Siz bitta qutiga rangni solib qo'yasiz va qutining nomini chaqirasiz. Qutidagi rangni bitta joydan o'zgartirsangiz, butun saytdagi ranglar avtomat o'zgaradi!</p>
+            
+            <div class="demo-area">
+                <h3>O'zingiz sinab ko'ring! 👇</h3>
+                <p>Tugmalarni bosing va <code>$primary-color</code> o'zgarganda nimalar ro'y berishini ko'ring:</p>
+                
+                <div class="color-btns">
+                    <button class="color-btn" style="background: #e84393;" onclick="changeColor('#e84393', 'Pushti')"></button>
+                    <button class="color-btn" style="background: #0984e3;" onclick="changeColor('#0984e3', 'Ko\'k')"></button>
+                    <button class="color-btn" style="background: #00b894;" onclick="changeColor('#00b894', 'Yashil')"></button>
+                    <button class="color-btn" style="background: #e17055;" onclick="changeColor('#e17055', 'Olovrang')"></button>
+                </div>
+
+                <div class="demo-box" id="var-box">Men SASS orqali bo'yalgan qutiman!</div>
+                <p class="demo-text" id="var-text">Mening rangim ham avtomat o'zgaradi!</p>
+
+                <div class="code-container">
+                    <div class="code-block">
+/* SCSS kodi */
+<span class="var">$primary-color</span>: <span class="val" id="code-color">#e84393</span>;
+
+<span class="tag">.quti</span> {
+  <span class="prop">background-color</span>: <span class="var">$primary-color</span>;
+}
+<span class="tag">.matn</span> {
+  <span class="prop">color</span>: <span class="var">$primary-color</span>;
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card" style="border-top-color: #00cec9;">
+            <h2>🪆 3. SASS "Nesting" (Ichma-ich yozish)</h2>
+            <p>HTML da kodlarni ichma-ich (Matryoshka o'yinchog'i kabi) yozamiz. Odatda CSS bunga ruxsat bermaydi. Lekin <b>SASS Nesting</b> yordamida kodni aynan HTML kabi tushunarli qilib yozish mumkin!</p>
+            
+            <button class="btn-magic" onclick="toggleNesting()">Sehrni ko'rish (SCSS ga aylantir) 🪄</button>
+            
+            <div class="code-container">
+                <div class="code-block" id="nesting-css">
+/* 😴 Oddiy va Uzun CSS */
+<span class="tag">nav</span> {
+  <span class="prop">background</span>: <span class="val">black</span>;
+}
+<span class="tag">nav ul</span> {
+  <span class="prop">margin</span>: <span class="val">0</span>;
+}
+<span class="tag">nav ul li</span> {
+  <span class="prop">color</span>: <span class="val">white</span>;
+}
+                </div>
+                
+                <div class="code-block" id="nesting-scss" style="display: none; border: 2px solid #00cec9;">
+/* 🤩 SASS Nesting (Juda qisqa!) */
+<span class="tag">nav</span> {
+  <span class="prop">background</span>: <span class="val">black</span>;
+
+  <span class="tag">ul</span> {
+    <span class="prop">margin</span>: <span class="val">0</span>;
+
+    <span class="tag">li</span> {
+      <span class="prop">color</span>: <span class="val">white</span>;
+    }
+  }
+}
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card" style="border-top-color: #fdcb6e;">
+            <h2>🍳 4. SASS "Mixins" (Sehrli retseptlar)</h2>
+            <p><b>Mixins</b> — bu takrorlanadigan kodlarni bir marta yozib, xohlagan joyda chaqirib ishlatish usuli. Xuddi onangizning shirin tort retseptini daftarga yozib qo'yib, har safar kitob qidirmasdan pishirganiga o'xshaydi!</p>
+            <div class="code-block" style="margin-top:10px;">
+/* Retseptni yaratamiz (@mixin) */
+<span class="var">@mixin</span> markazga-qoyish {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+}
+
+/* Retseptni ishlatamiz (@include) */
+<span class="tag">.mening-qutim</span> {
+  <span class="var">@include</span> markazga-qoyish;
+}
+            </div>
+        </div>
+
+        <div class="section-card" style="border-top-color: #a29bfe;">
+            <h2>⚙️ 5. `.scss` fayl va Compiler (Tarjimon) nima?</h2>
+            <p>Biz yozgan <code>style.scss</code> faylini brauzerlar (Chrome, Safari) tushunmaydi! Ular faqat oddiy CSS ni biladi. Shuning uchun bizga <b>Compiler</b> (tarjimon) kerak. U SASS tilidan CSS tiliga tezkor tarjima qilib beradi.</p>
+            
+            
+
+            <div class="tools-grid">
+                <div class="tool">
+                    <h4>💻 VS Code</h4>
+                    <p>Kodni yozish uchun qulay va chiroyli muharrir.</p>
+                </div>
+                <div class="tool">
+                    <h4>🟢 Node.js</h4>
+                    <p>Kompyuterimiz orqa fonda kodlarni ishlatishi uchun kerakli "motor".</p>
+                </div>
+                <div class="tool">
+                    <h4>⚙️ SASS Compiler</h4>
+                    <p>VS Code ichidagi "Live Sass Compiler" plaginini ishlatamiz.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card game-board">
+            <h2>🎮 Bilimdonlar Testi: SASS Qahramoni!</h2>
+            <p>Keling, bilib olganlarimizni o'yinda sinab ko'ramiz. Har bir to'g'ri javob uchun 10 ball!</p>
+            
+            <div id="quiz-area">
+                <div class="question-box" id="question-text">Savol yuklanmoqda...</div>
+                <div class="options-grid" id="options-grid">
+                    </div>
+            </div>
+
+            <div id="score-board">🏆 Ball: <span id="score">0</span> / 30</div>
+            <button class="btn-magic" style="display:none;" id="restart-btn" onclick="startQuiz()">Qaytadan o'ynash 🔄</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- 1. SASS Variables Simulatsiyasi ---
+        function changeColor(hexCode, colorName) {
+            // CSS Variable'ni o'zgartirish
+            document.documentElement.style.setProperty('--demo-color', hexCode);
+            // Kod blokidagi matnni o'zgartirish
+            document.getElementById('code-color').innerText = hexCode;
+            
+            // Kichik animatsiya effekti
+            const box = document.getElementById('var-box');
+            box.style.transform = "scale(1.05)";
+            setTimeout(() => { box.style.transform = "scale(1)"; }, 200);
+        }
+
+        // --- 2. Nesting Toggle Animatsiyasi ---
+        let isNestingOn = false;
+        function toggleNesting() {
+            const cssBlock = document.getElementById('nesting-css');
+            const scssBlock = document.getElementById('nesting-scss');
+            const btn = document.querySelector('button[onclick="toggleNesting()"]');
+
+            if (!isNestingOn) {
+                cssBlock.style.display = 'none';
+                scssBlock.style.display = 'block';
+                btn.innerHTML = "Qanday qisqarganini ko'rdingizmi? (Orqaga qaytish) 🔙";
+                btn.style.background = "linear-gradient(45deg, #00cec9, #0984e3)";
+                isNestingOn = true;
+            } else {
+                cssBlock.style.display = 'block';
+                scssBlock.style.display = 'none';
+                btn.innerHTML = "Sehrni ko'rish (SCSS ga aylantir) 🪄";
+                btn.style.background = "linear-gradient(45deg, #ff9f43, #ff6b6b)";
+                isNestingOn = false;
+            }
+        }
+
+        // --- 3. QUIZ GAME (Bilimdonlar O'yini) ---
+        const questions = [
+            {
+                question: "1. Bir marta rangni saqlab qo'yib, butun saytda ishlatish uchun qaysi SASS xususiyati kerak?",
+                options: ["Nesting", "Variables", "HTML", "Compiler"],
+                answer: 1 // To'g'ri javob indeksi (Variables)
+            },
+            {
+                question: "2. Matryoshka kabi kodlarni bir-birining ichiga yozish nima deb ataladi?",
+                options: ["Mixins", "Grid", "Nesting", "Flexbox"],
+                answer: 2 // Nesting
+            },
+            {
+                question: "3. Brauzer (Chrome) SASS (.scss) faylni to'g'ridan-to'g'ri tushuna oladimi?",
+                options: ["Ha, juda yaxshi tushunadi", "Yo'q, unga Compiler (tarjimon) kerak", "Faqat internet bo'lsa tushunadi", "Faqat tunda tushunadi 😂"],
+                answer: 1 // Yo'q, Compiler kerak
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function startQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('score').innerText = score;
+            document.getElementById('restart-btn').style.display = 'none';
+            document.getElementById('options-grid').style.display = 'grid';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestion >= questions.length) {
+                // O'yin tugadi
+                document.getElementById('question-text').innerHTML = `🎉 O'yin tugadi! Siz haqiqiy SASS qahramonisiz!`;
+                document.getElementById('options-grid').style.display = 'none';
+                document.getElementById('restart-btn').style.display = 'inline-block';
+                return;
+            }
+
+            const q = questions[currentQuestion];
+            document.getElementById('question-text').innerText = q.question;
+            
+            const optionsContainer = document.getElementById('options-grid');
+            optionsContainer.innerHTML = ''; // Oldingi variantlarni tozalash
+
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(index, q.answer, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIndex, correctIndex, btnElement) {
+            const allBtns = document.querySelectorAll('.opt-btn');
+            // Tugmalarni bosishni vaqtincha to'xtatish
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+
+            if (selectedIndex === correctIndex) {
+                btnElement.classList.add('correct');
+                score += 10;
+                document.getElementById('score').innerText = score;
+            } else {
+                btnElement.classList.add('wrong');
+                // To'g'risini yashil qilib ko'rsatish
+                allBtns[correctIndex].classList.add('correct');
+            }
+
+            // Keyingi savolga o'tish
+            setTimeout(() => {
+                currentQuestion++;
+                loadQuestion();
+            }, 1500); // 1.5 soniya kutib keyin o'tadi
+        }
+
+        // O'yinni birinchi marta ishga tushirish
+        window.onload = startQuiz;
+    </script>
+</body>
+</html>
